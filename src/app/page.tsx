@@ -96,7 +96,7 @@ const Header1 = () => {
               href={link.href}
               size="s"
               label={link.label}
-              variant="ghost"
+              variant="primary"
             />
           ))}
           <Button
@@ -111,7 +111,7 @@ const Header1 = () => {
         <Row show="s" vertical="center">
           <IconButton
             icon="menu"
-            variant="ghost"
+            variant="primary"
             aria-label="Menu"
           />
         </Row>
