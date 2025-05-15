@@ -84,7 +84,6 @@ const Header1 = () => {
         paddingX="32"
         paddingY="20"
         background="overlay"
-        backdropBlur={0.8}
         shadow="s"
       >
         <Logo size="s" href="/" />
