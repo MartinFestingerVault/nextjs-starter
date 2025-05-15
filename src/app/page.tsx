@@ -123,7 +123,7 @@ const Hero3 = () => (
       position="absolute"
       grid={{
         display: true,
-        opacity: 35,
+        opacity: "35",
         width: "0.5rem",
         height: "0.5rem",
         color: "accent-alpha-strong",
