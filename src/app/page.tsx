@@ -44,6 +44,7 @@ import {
 } from "@/once-ui/components";
 import { CodeBlock, MediaUpload } from "@/once-ui/modules";
 import { ScrollToTop } from "@/once-ui/components/ScrollToTop";
+import { Plans4 } from "./Plans4";
 
 const Header1 = () => {
   const navLinks = [
@@ -181,6 +182,22 @@ const Hero3 = () => (
   </Row>
 );
 
+const Pricing1 = () => {
+  return (
+    <Column as="section" id="pricing" fillWidth fitHeight horizontal="center" gap="xl">
+      <Column maxWidth={40} gap="12" horizontal="center">
+        <Heading as="h2" align="center" variant="display-strong-m">
+          Pricing
+        </Heading>
+        <Text align="center" onBackground="neutral-medium" variant="body-default-xl" wrap="balance">
+          Use Once UI for free. Upgrade for advanced components and resources.
+        </Text>
+      </Column>
+      <Plans4 maxWidth="m" />
+    </Column>
+  );
+};
+
 export default function Home() {
   return (
     <Column fillWidth paddingY="80" paddingX="s" horizontal="center" flex={1}>
@@ -212,6 +229,9 @@ export default function Home() {
       >
         {/* Nieuwe hero */}
         <Hero3 />
+
+        {/* Pricing section */}
+        <Pricing1 />
       </Column>
     </Column>
   );
