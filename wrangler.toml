@@ -1,0 +1,10 @@
+name = "nextjs-starter"
+compatibility_date = "2024-12-01"
+
+compatibility_flags = [
+  "nodejs_compat",
+  "nodejs_compat_populate_process_env"
+]
+
+[build]
+command = "npx @cloudflare/next-on-pages"
