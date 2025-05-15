@@ -4,19 +4,10 @@ import "@/once-ui/tokens/index.scss";
 import classNames from "classnames";
 
 import { baseURL, style, meta, font, effects } from "@/app/resources/config";
-import {
-  Background,
-  Column,
-  Flex,
-  ToastProvider,
-  ThemeProvider,
-} from "@/once-ui/components";
+import { Background, Column, Flex, ToastProvider, ThemeProvider } from "@/once-ui/components";
 
 import { opacity, SpacingToken } from "@/once-ui/types";
 import { Meta, Schema } from "@/once-ui/modules";
-
-// ✅ Header toevoegen
-import { Header1 } from "@/once-ui/components/Header1";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -56,7 +47,7 @@ export default function RootLayout({
         font.primary.variable,
         font.secondary.variable,
         font.tertiary.variable,
-        font.code.variable
+        font.code.variable,
       )}
     >
       <Schema
@@ -92,16 +83,13 @@ export default function RootLayout({
       <ThemeProvider>
         <ToastProvider>
           <Column as="body" fillWidth margin="0" padding="0">
-            {/* ✅ Header integratie */}
-            <Header1 authenticated={false} />
-
             <Background
               position="absolute"
               mask={{
                 x: effects.mask.x,
                 y: effects.mask.y,
                 radius: effects.mask.radius,
-                cursor: effects.mask.cursor,
+                cursor: effects.mask.cursor
               }}
               gradient={{
                 display: effects.gradient.display,
