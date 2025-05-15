@@ -1,4 +1,3 @@
-// Example page: delete the content or rework the blocks
 "use client";
 
 import type React from "react";
@@ -45,7 +44,221 @@ import {
 import { CodeBlock, MediaUpload } from "@/once-ui/modules";
 import { ScrollToTop } from "@/once-ui/components/ScrollToTop";
 
+// Project links for the footer
+const PROJECT_LINKS = [
+  {
+    href: "https://once-ui.com/docs/theming",
+    title: "Themes",
+    description: "Style your app in minutes",
+  },
+  {
+    href: "https://once-ui.com/docs/flexComponent",
+    title: "Layout",
+    description: "Build responsive layouts",
+  },
+  {
+    href: "https://once-ui.com/docs/typography",
+    title: "Typography",
+    description: "Scale text automatically",
+  },
+];
+
+/**
+ * Header1 Component
+ * A modern navigation header with logo and navigation links
+ */
+const Header1 = () => {
+  const navLinks = [
+    { label: "Features", href: "#features" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contact", href: "/contact" },
+  ];
+
+  return (
+    <Row position="fixed" top="0" fillWidth horizontal="center" zIndex={10}>
+      <Row
+        data-border="rounded"
+        horizontal="space-between"
+        maxWidth="l"
+        paddingX="32"
+        paddingY="20"
+        background="overlay"
+        backdropBlur={0.8}
+        shadow="s"
+      >
+        <Logo size="s" href="/" />
+        
+        {/* Desktop navigation */}
+        <Row gap="24" hide="s" vertical="center">
+          {navLinks.map(link => (
+            <Button
+              key={link.href}
+              href={link.href}
+              size="s"
+              label={link.label}
+              variant="ghost"
+            />
+          ))}
+          <Button
+            href="/signup"
+            size="s"
+            label="Get Started"
+            variant="primary"
+          />
+        </Row>
+        
+        {/* Mobile navigation */}
+        <Row show="s" vertical="center">
+          <IconButton
+            icon="menu"
+            variant="ghost"
+            aria-label="Menu"
+          />
+        </Row>
+      </Row>
+    </Row>
+  );
+};
+
+/**
+ * Hero3 Component
+ * A bold hero section with split content and interactive elements
+ */
+const Hero3 = () => (
+  <Row 
+    fillWidth 
+    paddingTop="120" 
+    paddingBottom="80" 
+    paddingX="32" 
+    gap="64" 
+    position="relative"
+    mobileDirection="column"
+  >
+    <Background
+      mask={{
+        x: 0,
+        y: 0,
+      }}
+      position="absolute"
+      gradient={{
+        display: true,
+        tilt: -35,
+        height: 60,
+        width: 100,
+        x: 50,
+        y: 30,
+        colorStart: "brand-solid-medium",
+        colorEnd: "static-transparent",
+      }}
+    />
+    <Background
+      mask={{
+        x: 100,
+        y: 0,
+        radius: 100,
+      }}
+      position="absolute"
+      grid={{
+        display: true,
+        opacity: 35,
+        width: "0.5rem",
+        color: "accent-alpha-strong",
+        height: "0.5rem",
+      }}
+    />
+    
+    {/* Left side content */}
+    <Column 
+      maxWidth={24} 
+      gap="32" 
+      paddingTop="64"
+    >
+      <Heading 
+        variant="display-strong-xl" 
+        as="h1"
+        wrap="balance"
+      >
+        Build beautiful interfaces in record time
+      </Heading>
+      
+      <Text 
+        variant="body-default-l" 
+        onBackground="neutral-medium"
+        wrap="balance"
+      >
+        A comprehensive design system for building modern web applications with speed and confidence.
+      </Text>
+      
+      <Row gap="16">
+        <Button
+          size="l"
+          label="Get Started"
+          variant="primary"
+          arrowIcon
+        />
+        <Button
+          size="l"
+          label="View Demo"
+          variant="secondary"
+          prefixIcon="play"
+        />
+      </Row>
+      
+      <Row gap="32" paddingTop="16">
+        <Column gap="8">
+          <Text variant="heading-strong-xs">100+</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">Components</Text>
+        </Column>
+        <Column gap="8">
+          <Text variant="heading-strong-xs">5k+</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">Happy Users</Text>
+        </Column>
+        <Column gap="8">
+          <Text variant="heading-strong-xs">99%</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">Satisfaction</Text>
+        </Column>
+      </Row>
+    </Column>
+    
+    {/* Right side content - Interactive display */}
+    <Column fillWidth>
+      <TiltFx
+        fillWidth
+        radius="xl"
+        border="accent-alpha-weak"
+        overflow="hidden"
+        shadow="xl"
+      >
+        <HoloFx fill>
+          <Row
+            aspectRatio="4/3"
+            background="surface"
+            padding="24"
+            fillWidth
+            vertical="center"
+            horizontal="center"
+          >
+            <SmartImage
+              src="/images/dashboard-preview.jpg"
+              alt="Dashboard preview"
+              radius="l"
+              border="neutral-alpha-weak"
+              shadow="m"
+              sizes="(max-width: 768px) 100vw, 600px"
+            />
+          </Row>
+        </HoloFx>
+      </TiltFx>
+    </Column>
+  </Row>
+);
+
+/**
+ * Main homepage component
+ */
 export default function Home() {
+  // State variables
   const [selectedValue, setSelectedValue] = useState("");
   const [selectedRange, setSelectedRange] = useState<DateRange>();
   const [isFirstDialogOpen, setIsFirstDialogOpen] = useState(false);
@@ -58,29 +271,13 @@ export default function Home() {
   const [tags, setTags] = useState<string[]>(["UX / UI", "Design systems", "AI / ML"]);
   const [twoFA, setTwoFA] = useState(false);
 
+  // Event handlers
   const handleSelect = (value: string) => {
     console.log("Selected option:", value);
     setSelectedValue(value);
   };
 
-  const links = [
-    {
-      href: "https://once-ui.com/docs/theming",
-      title: "Themes",
-      description: "Style your app in minutes",
-    },
-    {
-      href: "https://once-ui.com/docs/flexComponent",
-      title: "Layout",
-      description: "Build responsive layouts",
-    },
-    {
-      href: "https://once-ui.com/docs/typography",
-      title: "Typography",
-      description: "Scale text automatically",
-    },
-  ];
-
+  // Validation functions
   const validateIntro = (value: React.ReactNode) => {
     if (typeof value === "string" && value.length < 10) {
       return (
@@ -103,7 +300,11 @@ export default function Home() {
 
   return (
     <Column fillWidth paddingY="80" paddingX="s" horizontal="center" flex={1}>
-      <ScrollToTop><IconButton variant="secondary" icon="chevronUp"/></ScrollToTop>
+      <ScrollToTop>
+        <IconButton variant="secondary" icon="chevronUp"/>
+      </ScrollToTop>
+      
+      {/* Top gradient fade */}
       <Fade
         zIndex={3}
         pattern={{
@@ -118,64 +319,10 @@ export default function Home() {
         fillWidth
         blur={0.25}
       />
-      <Row position="fixed" top="0" fillWidth horizontal="center" zIndex={3}>
-        <Row
-          data-border="rounded"
-          horizontal="space-between"
-          maxWidth="l"
-          paddingRight="64"
-          paddingLeft="32"
-          paddingY="20"
-        >
-          <Logo size="s" icon={false} href="https://once-ui.com" />
-          <Row gap="12" hide="s">
-            <Button
-              href="https://discord.com/invite/5EyAQ4eNdS"
-              prefixIcon="discord"
-              size="s"
-              label="Discord"
-              weight="default"
-              variant="tertiary"
-            />
-            <Button
-              href="https://github.com/once-ui-system"
-              prefixIcon="github"
-              size="s"
-              label="GitHub"
-              weight="default"
-              variant="tertiary"
-            />
-            <Row position="fixed" top="20" right="20">
-              <StyleOverlay
-                position="fixed"
-                top="8"
-                right="8"
-                style={{ height: "calc(100vh - var(--static-space-16))" }}
-              />
-            </Row>
-          </Row>
-          <Row gap="16" show="s" horizontal="center" paddingRight="24">
-            <IconButton
-              href="https://discord.com/invite/5EyAQ4eNdS"
-              icon="discord"
-              variant="tertiary"
-            />
-            <IconButton
-              href="https://github.com/once-ui-system/nextjs-starter"
-              icon="github"
-              variant="tertiary"
-            />
-            <Row position="fixed" top="20" right="20">
-              <StyleOverlay
-                position="fixed"
-                top="8"
-                right="8"
-                style={{ height: "calc(100vh - var(--static-space-16))" }}
-              />
-            </Row>
-          </Row>
-        </Row>
-      </Row>
+      
+      {/* Header component */}
+      <Header1 />
+      
       <Column
         overflow="hidden"
         as="main"
@@ -186,6 +333,7 @@ export default function Home() {
         border="neutral-alpha-weak"
         fillWidth
       >
+        {/* Hero section with background effects */}
         <Column
           fillWidth
           horizontal="center"
@@ -194,6 +342,7 @@ export default function Home() {
           paddingTop="80"
           position="relative"
         >
+          {/* Background effects */}
           <Background
             mask={{
               x: 0,
@@ -207,115 +356,11 @@ export default function Home() {
               height: "0.25rem",
             }}
           />
-          <Background
-            mask={{
-              x: 80,
-              y: 0,
-              radius: 100,
-            }}
-            position="absolute"
-            gradient={{
-              display: true,
-              tilt: -35,
-              height: 50,
-              width: 75,
-              x: 100,
-              y: 40,
-              colorStart: "accent-solid-medium",
-              colorEnd: "static-transparent",
-            }}
-          />
-          <Background
-            mask={{
-              x: 100,
-              y: 0,
-              radius: 100,
-            }}
-            position="absolute"
-            gradient={{
-              display: true,
-              opacity: 100,
-              tilt: -35,
-              height: 20,
-              width: 120,
-              x: 120,
-              y: 35,
-              colorStart: "brand-solid-strong",
-              colorEnd: "static-transparent",
-            }}
-          />
-          <Column fillWidth horizontal="center" gap="32" padding="32" position="relative">
-            <InlineCode radius="xl" shadow="m" fit paddingX="16" paddingY="8">
-              Start by editing
-              <Text onBackground="brand-medium" marginLeft="8">
-                app/page.tsx
-              </Text>
-            </InlineCode>
-            <Heading wrap="balance" variant="display-strong-xl" align="center" marginBottom="16">
-              Code faster than AI
-            </Heading>
-            <Button
-              id="readDocs"
-              target="_blank"
-              label="Open docs"
-              href="https://once-ui.com/docs"
-              variant="secondary"
-              arrowIcon
-            />
-            <Column horizontal="center" paddingTop="64" fillWidth gap="24">
-              <Line maxWidth={4} marginBottom="16" background="neutral-alpha-medium" />
-              <AvatarGroup
-                marginBottom="8"
-                reverse
-                size="s"
-                avatars={[
-                  {
-                    src: "/images/l.jpg",
-                  },
-                  {
-                    src: "/images/z.jpg",
-                  },
-                ]}
-              />
-              <Heading marginBottom="12" as="h2" align="center" variant="heading-default-l">
-                Brought to you by indie creators
-                <br /> behind stellar projects:
-              </Heading>
-              <LogoCloud
-                paddingBottom="104"
-                columns="3"
-                mobileColumns="1"
-                limit={3}
-                fillWidth
-                logos={[
-                  {
-                    icon: false,
-                    wordmarkSrc: "/trademark/dopler-wordmark.svg",
-                    href: "https://dopler.app",
-                    size: "m",
-                  },
-                  {
-                    icon: false,
-                    wordmarkSrc: "/trademark/design-engineers-wordmark.svg",
-                    href: "https://club.dropler.io",
-                    size: "m",
-                  },
-                  {
-                    icon: false,
-                    wordmarkSrc: "/trademark/enroll-wordmark.svg",
-                    href: "https://enroll.dopler.app",
-                    size: "m",
-                  },
-                  {
-                    icon: false,
-                    wordmarkSrc: "/trademark/magic-portfolio-wordmark.svg",
-                    href: "https://magic-portfolio.com",
-                    size: "m",
-                  },
-                ]}
-              />
-            </Column>
-          </Column>
+          
+          {/* Hero3 Component */}
+          <Hero3 />
+          
+          {/* Showcase section */}
           <Column fillWidth paddingX="32" gap="12" horizontal="center" position="relative">
             <Heading as="h2" variant="display-default-m">
               Showcase
@@ -324,16 +369,16 @@ export default function Home() {
               Tiny snippets to inspire your next project
             </Text>
 
-            {/* COMPARE IMAGE */}
+            {/* Compare Image demo */}
             <CompareImage
               radius="xl"
               overflow="hidden"
               border="neutral-alpha-weak"
-              leftContent={{ src: "/images/1.jpg", alt: "alt" }}
-              rightContent={{ src: "/images/2.jpg", alt: "alt" }}
+              leftContent={{ src: "/images/1.jpg", alt: "Design variation 1" }}
+              rightContent={{ src: "/images/2.jpg", alt: "Design variation 2" }}
             />
 
-            {/* LOGIN */}
+            {/* Login demo */}
             <Row
               marginY="32"
               background="overlay"
@@ -431,7 +476,7 @@ export default function Home() {
           </Column>
         </Column>
 
-        {/* PAYMENT */}
+        {/* Payment section */}
         <Row
           paddingX="32"
           fillWidth
@@ -549,7 +594,7 @@ export default function Home() {
           </Column>
         </Row>
 
-        {/* BOOKING */}
+        {/* Booking section */}
         <Row
           padding="32"
           fillWidth
@@ -645,7 +690,7 @@ export default function Home() {
           </Column>
         </Row>
 
-        {/* PROFILE */}
+        {/* Profile section */}
         <Row horizontal="center" paddingX="32" paddingY="64" fillWidth gap="32" position="relative">
           <Background
             mask={{
@@ -849,7 +894,7 @@ export default function Home() {
           </Column>
         </Row>
 
-        {/* CODE PREVIEW */}
+        {/* Code Preview */}
         <TiltFx fillWidth paddingX="32" paddingTop="64">
           <Column
             border="neutral-alpha-weak"
@@ -917,6 +962,7 @@ export default function Home() {
           </Column>
         </TiltFx>
 
+        {/* "Learn more" section */}
         <Row
           position="relative"
           fillWidth
@@ -944,10 +990,12 @@ export default function Home() {
             Learn more
           </Row>
         </Row>
+        
+        {/* Link cards */}
         <Row fillWidth overflow="hidden">
           <Row maxWidth="32" borderTop="neutral-alpha-weak" borderBottom="neutral-medium" />
           <Row fillWidth border="neutral-alpha-weak" mobileDirection="column">
-            {links.map((link, index) => (
+            {PROJECT_LINKS.map((link, index) => (
               <Card
                 key={link.href}
                 fillWidth
@@ -956,7 +1004,7 @@ export default function Home() {
                 gap="8"
                 background="page"
                 direction="column"
-                borderRight={index < links.length - 1 ? "neutral-alpha-weak" : undefined}
+                borderRight={index < PROJECT_LINKS.length - 1 ? "neutral-alpha-weak" : undefined}
                 border={undefined}
               >
                 <Row fillWidth center gap="12">
@@ -973,6 +1021,8 @@ export default function Home() {
           </Row>
           <Row maxWidth="32" borderTop="neutral-alpha-weak" borderBottom="neutral-medium" />
         </Row>
+        
+        {/* Footer */}
         <Row
           position="relative"
           as="footer"
@@ -1016,6 +1066,7 @@ export default function Home() {
         </Row>
       </Column>
 
+      {/* Dialogs */}
       <Dialog
         isOpen={isFirstDialogOpen}
         onClose={() => setIsFirstDialogOpen(false)}
