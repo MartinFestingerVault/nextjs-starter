@@ -41,13 +41,13 @@ import {
   StyleOverlay,
   CompareImage,
   ThemeSwitcher,
-  ScrollToTop,
-  Plans4,
-  Hero3,
-  Header1,
 } from "@/once-ui/components";
 
-import { CodeBlock, MediaUpload } from "@/once-ui/modules";
+import { CodeBlock, MediaUpload } from "@once-ui/modules";
+import { ScrollToTop } from "@/once-ui/components/ScrollToTop";
+import { Plans4 } from "@/once-ui/components/Plans4";
+import { Hero3 } from "@/once-ui/components/Hero3";
+import { Header1 } from "@/once-ui/components/Header1";
 
 const Pricing1 = () => {
   return (
